@@ -1,0 +1,54 @@
+.horizontal-carousel {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+}
+
+.horizontal-carousel img {
+    max-width: 100%;
+    height: auto;
+}
+
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.carousel__videos {
+  display: flex;
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  /* flex: 0 0 auto;
+  scroll-snap-align: start;
+  width: 100%;
+  height: auto; */
+}
+
+.carousel__video {
+  flex-shrink: 0;
+  width: 320px;
+  height: 180px;
+}
+
+.carousel__button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.carousel__button--prev {
+  left: 10px;
+}
+
+.carousel__button--next {
+  right: 10px;
+}

@@ -11,7 +11,7 @@ class AvatarBlock {
 
 	constructor({ data, api }) {
 		this.data = data;
-		this.api = api; //wtf is this?
+		this.api = api;
 		this.avatarBlock = null;
         this.hello = this.hello.bind(this);
 	}
@@ -45,7 +45,7 @@ class AvatarBlock {
 		// console.log('avatar save   ', this.imageData);
 		return {
 			// content: input.value
-            content: this.data
+            image: this.data
 		};
 	}
 }

@@ -27,6 +27,9 @@
 	let content;
 	onMount(async () => {
 		if (typeof window !== 'undefined') {
+			const localData = localStorage.getItem('daryl');
+		   
+				
 			const EditorJS = (await import('@editorjs/editorjs')).default;
 			const Header = (await import('@editorjs/header')).default;
 			// const Text = (await import('@editorjs/paragraph')).default;
@@ -34,50 +37,21 @@
 			// const Embed = (await import('@editorjs/embed')).default;
 			// const AvatarBlockBlock = (await import (./AvatarBlock';
 			// const ImageTool = (await import('@editorjs/ImageTool')).default;
-
-			editor = new EditorJS({
+			let editJsConfig = {
 				holder: 'editorjs',
 				autofocus: true,
 				placeholder: 'Let`s write an awesome story!',
 				tools: {
 					avatar: AvatarBlock,
-// 					textBlock: {
-// 						class: Text,
-// 						inlineToolbar: true,
-// 						config: {
-// 							placeholder: `http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4
-// http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4
-// http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4`
-// 						}
-// 					},
 					header: { class: Header, inlineToolbar: true },
                     list: List,
-					// imageSimple: SimpleImage,
-					// carouselSimple: SimpleCarousel,
 					
-					
-					// image: ImageTool,
+				}};
+			if (localData) {
+				editJsConfig.data = JSON.parse(localData);
+			}
 
-					// quote: Quote,
-					// code: CodeTool,
-					// link: LinkTool,
-					// marker: Marker,
-					// inlineCode: InlineCode,
-					// delimiter: Delimiter,
-					// table: Table,
-					// warning: Warning,
-					// paragraph: Paragraph,
-					// raw: Raw,
-					// checklist: Checklist,
-					// simpleImage: SimpleImage
-				}
-				// @ts-ignore
-				// onChange: async(api, data) => {
-				// let content = await editor.saver.save();
-				// console.log('content-111', content);
-				//     editorData.set(data);
-				// }
-			});
+			editor = new EditorJS(editJsConfig);
 		}
 	});
 </script>

@@ -13,6 +13,7 @@ class AvatarBlock {
 		this.data = data;
 		this.api = api; //wtf is this?
 		this.avatarBlock = null;
+        this.hello = this.hello.bind(this);
 	}
 
 	handleImageLoaded(event) {
@@ -21,12 +22,17 @@ class AvatarBlock {
 		// console.log('Image loaded:', {thisdata: this.data});
 	}
 
+    hello() {
+        console.log('hello');
+    
+    }
 	render() {
 		const container = document.createElement('div');
 		this.avatarBlock = new AvatarComponent({
 			target: container,
 			props: {
-				data: this.data
+				data: this.data,
+                api: this.hello
 			}
 		});
 		this.avatarBlock.$on('imageLoaded', this.handleImageLoaded.bind(this));

@@ -43,6 +43,9 @@ class AvatarBlock {
 	save(blockContent) {
 		// const input = blockContent.querySelector('input');
 		// console.log('avatar save   ', this.imageData);
+        if (this.data?.image) {
+            return this.data;
+        }
 		return {
 			// content: input.value
             image: this.data

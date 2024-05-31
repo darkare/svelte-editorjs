@@ -17,12 +17,13 @@
 	// import Raw from '@editorjs/raw';
 	// import Checklist from '@editorjs/checklist';
 	// import SimpleImage from '@editorjs/simple-image';
+	// import SimpleImage from './../../lib/components/SimpleImage';
 	import { writable } from 'svelte/store';
+	import { logApple, convertToAppleNewsFormat } from '$lib/components/apple';
 
 	import AvatarBlock from './Avatar';
 	// let ssr = false;
 	let editor;
-	let editorData = writable({});
 	let content;
 	onMount(async () => {
 		if (typeof window !== 'undefined') {
@@ -30,19 +31,37 @@
 
 			const EditorJS = (await import('@editorjs/editorjs')).default;
 			const Header = (await import('@editorjs/header')).default;
+			// const ImageTool = (await import('@editorjs/image')).default;
 			// const Text = (await import('@editorjs/paragraph')).default;
 			const List = (await import('@editorjs/list')).default;
 			// const Embed = (await import('@editorjs/embed')).default;
 			// const AvatarBlockBlock = (await import (./AvatarBlock';
 			// const ImageTool = (await import('@editorjs/ImageTool')).default;
+			const SimpleImage = (await import('@editorjs/simple-image')).default;
+			const Checklist = (await import('@editorjs/checklist')).default;
+			// console.log('simpleimage', SimpleImage)
 			let editJsConfig = {
 				holder: 'editorjs',
 				autofocus: true,
-				placeholder: 'Let`s write an awesome story!',
+				// placeholder: 'Let`s write an awesome story!',
 				tools: {
+					image: SimpleImage,
 					avatar: AvatarBlock,
 					header: { class: Header, inlineToolbar: true },
-					list: List
+					list: List,
+					Checklist: Checklist,
+					
+					// image: {
+					// 	class: ImageTool,
+					// 	config: {
+					// 		endpoints: {
+					// 			endpoints: {
+					// 				byFile: 'http://localhost:5173/uploadFile', // Your backend file uploader endpoint
+					// 				byUrl: 'http://localhost:5173/fetchUrl' // Your endpoint that provides uploading by Url
+					// 			}
+					// 		}
+					// 	}
+					// }
 				}
 			};
 			if (localData) {
@@ -75,5 +94,8 @@
 	}}>Save</button
 >
 <button on:click={openPreview}>Preview</button>
+<button on:click={async() => {
+	content = await editor.saver.save();
+	convertToAppleNewsFormat(content)}}>Convert to Apple News Format</button>
 <hr />
 <div id="editorjs"></div>

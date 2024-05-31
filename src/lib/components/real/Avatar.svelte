@@ -1,6 +1,5 @@
 <script>
     export let data;
-    console.log('111',data);
 </script>
 
 <div class="avatar" >

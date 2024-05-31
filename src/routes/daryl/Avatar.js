@@ -13,42 +13,84 @@ class AvatarBlock {
 		this.data = data;
 		this.api = api;
 		this.avatarBlock = null;
-        this.hello = this.hello.bind(this);
+		this.hello = this.hello.bind(this);
 	}
 
 	handleImageLoaded(event) {
-        this.data = event.detail;
-        // this.imageData  = event.detail;
+		this.data = event.detail;
+		// this.imageData  = event.detail;
 		// console.log('Image loaded:', {thisdata: this.data});
 	}
 
-    hello() {
-        console.log('hello');
-    
-    }
+	hello() {
+		console.log('hello');
+	}
 	render() {
 		const container = document.createElement('div');
 		this.avatarBlock = new AvatarComponent({
 			target: container,
 			props: {
 				data: this.data,
-                api: this.hello
+				api: this.hello
 			}
 		});
 		this.avatarBlock.$on('imageLoaded', this.handleImageLoaded.bind(this));
+		let tooltip = document.createElement('div');
+
+		// Add "Hello World" text to the tooltip
+		let text = document.createTextNode('Click on the avatar to upload an image');
+		tooltip.appendChild(text);
+		// Add an icon to the tooltip
+		
+		let icon = document.createElement('i');
+		icon.className = 'fas fa-exclamation-circle'; // replace with the class name of your icon
+		icon.style.position = 'absolute';
+		icon.style.right = '-20px';
+		icon.style.top = '10px';
+		tooltip.appendChild(icon);
+
+		// Style the tooltip
+		tooltip.style.display = 'none';
+		tooltip.style.position = 'absolute';
+		tooltip.style.border = '1px solid black';
+		tooltip.style.borderRadius = '10px';
+		tooltip.style.backgroundColor = '#f9f9f9';
+		tooltip.style.padding = '10px';
+		tooltip.style.boxShadow = '2px 2px 10px rgba(0, 0, 0, 0.1)';
+
+		container.appendChild(tooltip);
+
+		// Show tooltip on mouseover
+		container.onmouseover = function (event) {
+			tooltip.style.display = 'block';
+			// Adjust the left property to display the tooltip to the right of the Avatar component
+			tooltip.style.left = event.pageX - container.offsetWidth + 150 + 'px';
+			tooltip.style.top = event.pageY - container.offsetParent + 'px';
+			tooltip.style.marginTop = '-50px';
+			tooltip.style.backgroundColor = 'lightyellow';
+		};
+
+		// Hide tooltip on mouseout
+		container.onmouseout = function () {
+			tooltip.style.display = 'none';
+		};
 
 		return container;
 	}
+	openToolbar() {
+		this.api.toolbar.open();
 
+		console.log('open toolbar');
+	}
 	save(blockContent) {
 		// const input = blockContent.querySelector('input');
 		// console.log('avatar save   ', this.imageData);
-        if (this.data?.image) {
-            return this.data;
-        }
+		if (this.data?.image) {
+			return this.data;
+		}
 		return {
 			// content: input.value
-            image: this.data
+			image: this.data
 		};
 	}
 }

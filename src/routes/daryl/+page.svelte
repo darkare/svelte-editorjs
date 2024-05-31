@@ -19,7 +19,6 @@
 	// import SimpleImage from '@editorjs/simple-image';
 	import { writable } from 'svelte/store';
 
-
 	import AvatarBlock from './Avatar';
 	// let ssr = false;
 	let editor;
@@ -28,8 +27,7 @@
 	onMount(async () => {
 		if (typeof window !== 'undefined') {
 			const localData = localStorage.getItem('daryl');
-		   
-				
+
 			const EditorJS = (await import('@editorjs/editorjs')).default;
 			const Header = (await import('@editorjs/header')).default;
 			// const Text = (await import('@editorjs/paragraph')).default;
@@ -44,9 +42,9 @@
 				tools: {
 					avatar: AvatarBlock,
 					header: { class: Header, inlineToolbar: true },
-                    list: List,
-					
-				}};
+					list: List
+				}
+			};
 			if (localData) {
 				editJsConfig.data = JSON.parse(localData);
 			}
@@ -54,6 +52,18 @@
 			editor = new EditorJS(editJsConfig);
 		}
 	});
+	function openPreview() {
+		const width = 800;
+		const height = 600;
+		const left = (window.screen.width - width) / 2;
+		const top = (window.screen.height - height) / 2;
+
+		window.open(
+			'./daryl/preview',
+			'_blank',
+			`height=${height},width=${width},top=${top},left=${left}`
+		);
+	}
 </script>
 
 <h1>Welcome to EditorJs</h1>
@@ -64,4 +74,6 @@
 		localStorage.setItem('daryl', JSON.stringify(content));
 	}}>Save</button
 >
+<button on:click={openPreview}>Preview</button>
+<hr />
 <div id="editorjs"></div>

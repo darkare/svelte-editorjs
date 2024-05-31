@@ -34,7 +34,7 @@
 			// const ImageTool = (await import('@editorjs/image')).default;
 			// const Text = (await import('@editorjs/paragraph')).default;
 			const List = (await import('@editorjs/list')).default;
-			// const Embed = (await import('@editorjs/embed')).default;
+			const Embed = (await import('@editorjs/embed')).default;
 			// const AvatarBlockBlock = (await import (./AvatarBlock';
 			// const ImageTool = (await import('@editorjs/ImageTool')).default;
 			const SimpleImage = (await import('@editorjs/simple-image')).default;
@@ -50,6 +50,16 @@
 					header: { class: Header, inlineToolbar: true },
 					list: List,
 					Checklist: Checklist,
+					embed: {
+						class: Embed,
+                        inlineToolbar: true,
+						config: {
+							services: {
+								youtube: true,
+								coub: true
+							}
+						}
+					}
 					
 					// image: {
 					// 	class: ImageTool,

@@ -1,5 +1,12 @@
 import './tooltip.css'
-export default class TextColor {
+class TextColor {
+  static get toolbox() {
+    return {
+      title: 'Change Daryl Text Color',
+      icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M3 21v-3l10-10 3 3-10 10H3zm15.5-11.5l-3-3 1.5-1.5 3 3-1.5 1.5zm3-3L18.5 3 20 1.5l3 3-1.5 1.5zM0 18.5V24h5.5l11-11-5.5-5.5L0 18.5z"/></svg>'
+    };
+  }
+
   static get isInline() {
     return true;
   }
@@ -13,29 +20,29 @@ export default class TextColor {
     };
   }
 
-  static get toolbox() {
-    return {
-      title: 'Change Text Color',
-      icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M3 21v-3l10-10 3 3-10 10H3zm15.5-11.5l-3-3 1.5-1.5 3 3-1.5 1.5zm3-3L18.5 3 20 1.5l3 3-1.5 1.5zM0 18.5V24h5.5l11-11-5.5-5.5L0 18.5z"/></svg>'
-    };
-  }
+
 
   constructor({ api }) {
     this.api = api;
-    this.button = null;
+    this.button = document.createElement('button'); ;
     this.state = false;
     this.color = 'red';
     this.colors = ['red', 'green', 'blue', 'yellow', 'purple'];
   }
 
   render() {
-    this.button = document.createElement('button');
+    // this.button = 
     this.button.type = 'button';
     this.button.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M3 21v-3l10-10 3 3-10 10H3zm15.5-11.5l-3-3 1.5-1.5 3 3-1.5 1.5zm3-3L18.5 3 20 1.5l3 3-1.5 1.5zM0 18.5V24h5.5l11-11-5.5-5.5L0 18.5z"/></svg>';
+    this.button.title = 'Change Daryl the text color';
+    this.button.classList.add('cdx-inline-tool');
+    // this.button.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M3 21v-3l10-10 3 3-10 10H3zm15.5-11.5l-3-3 1.5-1.5 3 3-1.5 1.5zm3-3L18.5 3 20 1.5l3 3-1.5 1.5zM0 18.5V24h5.5l11-11-5.5-5.5L0 18.5z"/></svg>';
+    // this.button.title = 'Change Daryl the text color';
     this.button.classList.add('cdx-inline-tool');
 
     // Add a tooltip
-    this.api.tooltip.onHover(this.button, 'Change the text color');
+    // this.api.tooltip.onHover(this.button, 'Change Daryl the text color123');
+    // this.api.tooltip.onHover(this.button, 'Change Daryl the text color');
 
     return this.button;
   }
@@ -87,3 +94,6 @@ export default class TextColor {
     return wrapper;
   }
 }
+
+
+export default TextColor;

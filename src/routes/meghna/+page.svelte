@@ -5,7 +5,7 @@
 	import SimpleCarousel from './../../lib/components/SimpleCarousel';
 	import CustomBlock from './../../lib/components/CustomBlock';
 	import CustomAccordionBlock from './../../lib/components/CustomAccordionBlock';
-	import TextColor from '../../lib/components/TextColor';
+	// import TextColor from '../../lib/components/TextColor';
 	let ssr = false;
 	let editor;
 	let editorData = writable({});
@@ -17,7 +17,7 @@
 			const Text = (await import('@editorjs/paragraph')).default;
 			const List = (await import('@editorjs/list')).default;
 			const Embed = (await import('@editorjs/embed')).default;
-			
+			const TextColor = (await import('../../lib/components/TextColor')).default;
 			const localData = localStorage.getItem('mainpage');
 
 			let editJsConfig = {

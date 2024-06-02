@@ -25,4 +25,9 @@
     font-size: 12px;
     z-index: 10;
   }
+
+  .cd-editor__tooltip {
+    visibility: visible;
+    opacity: 1;
+  }
   

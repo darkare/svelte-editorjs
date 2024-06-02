@@ -28,6 +28,15 @@ export default class CustomAccordionBlock {
         this.data.items = event.detail.items; // Update data.items with the latest items array
       });
 
+    // Add a tooltip
+    // const tooltipElement = document.createElement('div');
+    // tooltipElement.textContent = 'Hover over me';
+    // tooltipElement.classList.add('custom-block__tooltip');
+    // this.api.tooltip.onHover(tooltipElement, 'This is the tooltip content');
+
+    // this.wrapper.appendChild(tooltipElement);
+
+
     return this.wrapper;
   }
 

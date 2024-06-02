@@ -78,6 +78,23 @@
     .accordion-form {
         margin-top:40px;
     }
+    /* .custom-block__tooltip {
+        margin-top: 5px;
+        font-size: 12px;
+        color: #666;
+        cursor: pointer;
+    }
+
+    .custom-block__tooltip:hover::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        background-color: #333;
+        color: #fff;
+        padding: 5px;
+        border-radius: 4px;
+        font-size: 12px;
+        white-space: nowrap;
+    } */
 </style>
 
 <div class="accordion">

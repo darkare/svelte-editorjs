@@ -1,0 +1,28 @@
+/* customTools.css */
+.cdx-inline-tool--active {
+    background-color: #f3f3f3;
+  }
+  
+  .cdx-color-button {
+    width: 20px;
+    height: 20px;
+    border: none;
+    cursor: pointer;
+    margin-right: 5px;
+  }
+  
+  .cdx-color-button:hover {
+    border: 1px solid #000;
+  }
+  
+  /* Tooltip styling */
+  .cdx-tooltip {
+    position: absolute;
+    padding: 4px 8px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 12px;
+    z-index: 10;
+  }
+  

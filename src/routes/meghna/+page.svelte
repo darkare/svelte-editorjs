@@ -5,6 +5,7 @@
 	import SimpleCarousel from './../../lib/components/SimpleCarousel';
 	import CustomBlock from './../../lib/components/CustomBlock';
 	import CustomAccordionBlock from './../../lib/components/CustomAccordionBlock';
+	import TextColor from '../../lib/components/TextColor';
 	let ssr = false;
 	let editor;
 	let editorData = writable({});
@@ -24,15 +25,6 @@
 				autofocus: true,
 				placeholder: 'Let`s write an awesome story!',
 				tools: {
-					textBlock: {
-						class: Text,
-						inlineToolbar: true,
-						config: {
-							placeholder: `http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4
-http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4
-http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4`
-						}
-					},
 					header: { class: Header, inlineToolbar: true },
                     list: List,
 					imageSimple: {
@@ -41,7 +33,7 @@ http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscape
 					},
 					carouselSimple: SimpleCarousel,
 					customBlock: CustomBlock,
-					customAccordionBlock: CustomAccordionBlock,
+					customAccordionBlock: {class: CustomAccordionBlock, inlineToolbar: true},
 					embed: {
 						class: Embed,
                         inlineToolbar: true,
@@ -51,8 +43,33 @@ http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscape
 								coub: true
 							}
 						}
+					},
+					textColor: {
+						class: TextColor,
+						inlineToolbar: true
+					},
+
+				},
+				sanitize: {
+					span: {
+					class: true,
+					style: true
 					}
 				}
+				// onReady: () => {
+				// 	const toolbarButtons = document.querySelectorAll('.ce-inline-toolbar__button');
+				// 	toolbarButtons.forEach(button => {
+				// 	const toolName = button.getAttribute('data-tool');
+				// 	switch (toolName) {
+				// 		case 'textColor':
+				// 		 editor.api.tooltip.onHover(button, 'Change text color');
+				// 		 console.log('it was here');
+				// 		break;
+				// 		default:
+				// 		break;
+				// 	}
+				// 	});
+				// }
 			};
 
 			if (localData) {

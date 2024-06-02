@@ -26,11 +26,24 @@
     .texts {
         grid-column: 2;
     }
+    .fake-para {
+        margin-bottom:20px;
+    }
 </style>
 
-<h3>This is to preview the page in using the real components</h3>
-<hr /> <!-- Line divider -->
-<div class="grid">
+<!-- <div class="grid"> -->
+    <div class="texts">
+        {#if data && data.blocks}
+            {#each data.blocks as block (block.id)}
+                {#if block.type === 'paragraph'}
+                    <div class="fake-para">{@html block.data.text}</div>
+                {/if}
+                {#if block.type === 'header'}
+                    <Header data={block.data} />
+                {/if}
+            {/each}
+        {/if}
+    </div>
     <div class="accordions">
         {#if data && data.blocks}
             {#each data.blocks as block (block.id)}
@@ -40,16 +53,4 @@
             {/each}
         {/if}
     </div>
-    <div class="texts">
-        {#if data && data.blocks}
-            {#each data.blocks as block (block.id)}
-                {#if block.type === 'paragraph'}
-                    <Paragraph data={block.data} />
-                {/if}
-                {#if block.type === 'header'}
-                    <Header data={block.data} />
-                {/if}
-            {/each}
-        {/if}
-    </div>
-</div>
+<!-- </div> -->

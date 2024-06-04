@@ -1,5 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
+	import pkg from 'lodash';
+	const { debounce } = pkg;
 	// import EditorJS from '@editorjs/editorjs';
 	// import Header from '@editorjs/header';
 	// import List from '@editorjs/list';
@@ -35,24 +37,26 @@
 			// const Text = (await import('@editorjs/paragraph')).default;
 			const List = (await import('@editorjs/list')).default;
 			const Embed = (await import('@editorjs/embed')).default;
-			// const AvatarBlockBlock = (await import (./AvatarBlock';
-			// const ImageTool = (await import('@editorjs/ImageTool')).default;
 			const SimpleImage = (await import('@editorjs/simple-image')).default;
 			const Checklist = (await import('@editorjs/checklist')).default;
 			// console.log('simpleimage', SimpleImage)
 			let editJsConfig = {
 				holder: 'editorjs',
 				autofocus: true,
+
 				// placeholder: 'Let`s write an awesome story!',
 				tools: {
 					image: SimpleImage,
 					avatar: AvatarBlock,
 					header: { class: Header, inlineToolbar: true },
 					list: List,
-					Checklist: Checklist,
+					checklist: {
+						class: Checklist,
+						inlineToolbar: true
+					},
 					embed: {
 						class: Embed,
-                        inlineToolbar: true,
+						inlineToolbar: true,
 						config: {
 							services: {
 								youtube: true,
@@ -72,15 +76,22 @@
 					// 		}
 					// 	}
 					// }
-				}
+				},
+				onChange: debounce(async () => {
+					const savedData = await editor.save();
+					console.log(savedData.blocks);
+				}, 300) // 300ms debounce time,
 			};
 			if (localData) {
 				editJsConfig.data = JSON.parse(localData);
 			}
 
 			editor = new EditorJS(editJsConfig);
+		
 		}
 	});
+
+	
 	function openPreview() {
 		const width = 800;
 		const height = 600;
@@ -104,8 +115,11 @@
 	}}>Save</button
 >
 <button on:click={openPreview}>Preview</button>
-<button on:click={async() => {
-	content = await editor.saver.save();
-	convertToAppleNewsFormat(content)}}>Convert to Apple News Format</button>
+<button
+	on:click={async () => {
+		content = await editor.saver.save();
+		convertToAppleNewsFormat(content);
+	}}>Convert to Apple News Format</button
+>
 <hr />
 <div id="editorjs"></div>
